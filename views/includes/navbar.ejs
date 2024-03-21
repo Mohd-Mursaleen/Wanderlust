@@ -1,0 +1,210 @@
+<style>
+  /* Default styling */
+  .searchbox {
+    display: flex;
+
+    justify-content: flex-end;
+    align-items: center; /* Align items vertically */
+  }
+
+  .searchbox .container-fluid {
+    max-width: 1200px; /* Adjust as needed */
+  }
+
+  .searchbox .form-control {
+    width: 200px; /* Adjust as needed */
+    transition: 1s;
+    /* Smooth transition for width */
+  }
+
+  /* Media query for screens less than 800px */
+  @media (max-width: 1033px) {
+    .searchbox .form-control {
+      width: 200px !important; /* Adjust width for smaller screens */
+    }
+  }
+
+  @media (max-width: 600px) {
+    .searchbox .form-control {
+      width: 100px !important; /* Adjust width for even smaller screens */
+    }
+  }
+  @media (max-width: 488px) {
+    .searchbox .form-control {
+      width: 100px !important; /* Adjust width for even smaller screens */
+    }
+    .btn-red {
+      text-align: center;
+      padding-right: 20px;
+      padding-left: 10px;
+      margin: 0;
+      font-size: 0.8rem !important;
+      width: 50%;
+    }
+  }
+
+  .navbar {
+    height: 5rem;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Adjust alignment */
+    padding: 0 1rem; /* Add padding */
+  }
+  .btn {
+    background-color: #dc3545 !important;
+  }
+  /* Navbar */
+  .navbar,
+  .navbar-collapse {
+    background-color: #ffffff; /* White background */
+  }
+
+  .navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #dc3545 !important; /* Red color for brand */
+    margin-right: auto; /* Push to the left */
+  }
+
+  .navbar-nav .nav-link {
+    color: #333; /* Dark text color */
+    margin-right: 15px;
+  }
+
+  .navbar-nav .nav-link:hover {
+    color: #dc3545; /* Red color on hover */
+  }
+
+  /* Search Form */
+  .search {
+    width: 100%;
+    max-width: 300px; /* Max width for responsiveness */
+    border-radius: 30px;
+  }
+
+  .btn-red {
+    color: #ffffff;
+    background-color: red;
+    border-radius: 30px;
+    font-size: 0.8rem;
+  }
+
+  .searchbox {
+    margin-left: auto; /* Push to the right */
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg bg-body-light border-bottom sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/listings">
+      <i class="fa-solid fa-compass"></i>
+      Wanderlust
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/">Explore</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/listings/new">List Your Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            User
+            <i class="fa-solid fa-user" style="font-size: 1.2rem"></i>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <% if(!currUser) { %>
+            <li><a class="dropdown-item" href="/signup">Sign Up</a></li>
+            <li><a class="dropdown-item" href="/login">Login</a></li>
+            <% } else { %>
+            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+            <% } %>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="searchbox">
+      <div class="container-fluid">
+        <form class="d-flex" method="post" action="/listings/search">
+          <input
+            class="search me-2 form-control"
+            type="search"
+            name="name"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button class="btn btn-red" type="submit" value="Search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</nav>
+<script>
+  // Function to toggle search field visibility
+  function toggleSearchField() {
+    var searchField = document.querySelector(".search");
+    if (
+      searchField.style.display === "none" ||
+      searchField.style.display === ""
+    ) {
+      searchField.style.display = "block";
+    } else {
+      // Check if there is text in the search field
+      if (searchField.value.trim() === "") {
+        searchField.style.display = "none";
+      }
+    }
+  }
+
+  // Event listener for search button click
+  document
+    .querySelector(".btn-red")
+    .addEventListener("click", function (event) {
+      event.preventDefault(); // Prevent form submission
+      var searchField = document.querySelector(".search");
+      // Check if there is text in the search field
+      if (
+        searchField.value.trim() === "" ||
+        searchField.style.display === "none"
+      ) {
+        toggleSearchField(); // Toggle search field visibility
+      } else {
+        // If there is text, submit the form for search
+        document.querySelector("form").submit();
+      }
+    });
+
+  // Event listener to close search field when clicking outside of it
+  document.addEventListener("click", function (event) {
+    var searchField = document.querySelector(".search");
+    var btnRed = document.querySelector(".btn-red");
+    if (event.target !== searchField && event.target !== btnRed) {
+      searchField.style.display = "none";
+    }
+  });
+</script>

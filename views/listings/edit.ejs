@@ -1,0 +1,45 @@
+<% layout('/layout/boilerplate.ejs') -%>
+
+    <div class="container">
+        <form action="/listings/<%=listing.id%>?_method=PUT" method="post" novalidate class="listing-form needs-validation">
+            <h3 class="form-heading">Edit a Listing</h3>
+
+            <div class="form-group">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" name="listing[title]" required placeholder="Enter title" class="form-control" value="<%=listing.title%>">
+            </div>
+
+            <div class="form-group">
+                <label for="description" class="form-label">Description</label>
+                <textarea name="listing[description]" cols="100" rows="4"  placeholder="Enter description" class="form-control"><%=listing.description%></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="image" class="form-label">Image Link</label>
+                <input type="text" name="listing[image.url]"  placeholder="Enter URL" class="form-control" value=<%=listing.image.url%>> 
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="number" name="listing[price]" required placeholder="Enter price" class="form-control" value="<%=listing.price%>">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="country" class="form-label">Country</label>
+                        <input type="text" name="listing[country]" required placeholder="Enter country" class="form-control" value="<%=listing.country%>">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="location" class="form-label">Location</label>
+                <input type="text" name="listing[location]" required placeholder="Enter location" class="form-control" value="<%=listing.location%>">
+            </div>
+
+            <button type="submit" class="btn btn-danger btn-block mt-3">Edit</button>
+        </form>
+    </div>
+

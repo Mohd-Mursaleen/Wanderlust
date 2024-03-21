@@ -1,0 +1,184 @@
+<% layout('/layout/boilerplate.ejs') -%>
+<style>
+  /* Apply modern styling to checkboxes */
+  .form-check-input {
+    margin-right: 5px;
+  }
+
+  /* Adjust spacing between checkboxes */
+  .form-check-label {
+    margin-right: 15px;
+  }
+
+  /* Make checkboxes responsive */
+  @media (max-width: 768px) {
+    .form-group {
+      margin-bottom: 15px;
+    }
+  }
+</style>
+<div class="container">
+  <form
+    action="/listings"
+    method="post"
+    novalidate
+    class="listing-form needs-validation"
+    enctype="multipart/form-data"
+  >
+    <h3 class="form-heading">Create a Listing</h3>
+
+    <div class="form-group">
+      <label for="title" class="form-label">Title</label>
+      <input
+        type="text"
+        name="listing[title]"
+        placeholder="Enter title"
+        required
+        class="form-control"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="description" class="form-label">Description</label>
+      <textarea
+        name="listing[description]"
+        cols="100"
+        rows="4"
+        placeholder="Enter description"
+        class="form-control"
+      ></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="file" class="form-label">Upload Image</label>
+      <input type="file" name="listing[image.url]" class="form-control" />
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="price" class="form-label">Price</label>
+          <input
+            type="number"
+            name="listing[price]"
+            required
+            placeholder="Enter price"
+            class="form-control"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="country" class="form-label">Country</label>
+          <input
+            type="text"
+            name="listing[country]"
+            required
+            placeholder="Enter country"
+            class="form-control"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="location" class="form-label">Location</label>
+      <input
+        type="text"
+        name="listing[location]"
+        required
+        placeholder="Enter location"
+        class="form-control"
+      />
+    </div>
+    <label class="form-label mt-3">Tags:</label>
+    <div class="row">
+      <div class="form-group col-md-3">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            name="filters"
+            id="swimming-pools"
+            value="swimming-pools"
+          />
+          <label class="form-check-label" for="swimming-pools"
+            >Swimming Pools</label
+          >
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            name="filters"
+            id="iconic-cities"
+            value="iconic-cities"
+          />
+          <label class="form-check-label" for="iconic-cities"
+            >Iconic Cities</label
+          >
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            name="filters"
+            id="beach"
+            value="beach"
+          />
+          <label class="form-check-label" for="beach">Beach</label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            name="filters"
+            id="farms"
+            value="farms"
+          />
+          <label class="form-check-label" for="farms">Farms</label>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            name="filters"
+            id="snow"
+            value="snow"
+          />
+          <label class="form-check-label" for="snow">Snow</label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            name="filters"
+            id="countryside"
+            value="countryside"
+          />
+          <label class="form-check-label" for="countryside">Countryside</label>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            name="filters"
+            id="camping"
+            value="camping"
+          />
+          <label class="form-check-label" for="camping">Camping</label>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-danger btn-block mt-3">
+      Add Listing
+    </button>
+  </form>
+</div>
