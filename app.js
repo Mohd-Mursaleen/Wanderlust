@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 const cloudinary = require("cloudinary").v2;
-
+const Listings = require("./models/listing.js");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const express = require("express");
 var flash = require("connect-flash");
@@ -88,9 +88,11 @@ app.use((req, res, next) => {
 app.use("/listings", listings);
 app.use("/listings/:id/review", reviews);
 app.use("/", users);
-app.get("/", (req, res) => {
-  res.render("listings/home.ejs");
+app.get("/", async (req, res) => {
+  let allListings = await Listings.find({});
+  res.render("listings/home.ejs", { allListings });
 });
+
 app.all("*", (req, res, next) => {
   next(new ExpressError(404, "Page not founds"));
 });

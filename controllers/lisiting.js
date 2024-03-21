@@ -110,10 +110,16 @@ module.exports.searchListing = async (req, res) => {
 };
 module.exports.filters = async (req, res) => {
   let { filter } = req.params;
-  console.log(filter);
+  // console.log(filter);
   const allListings = await Listings.find({
     filters: { $regex: new RegExp(filter, "i") },
   });
+  if (allListings.length === 0) {
+    return res.redirect("/listings");
+  }
+
+  // Render the index page with the search results
   res.render("listings/index.ejs", { allListings });
-  // console.log(filteredListings);
 };
+
+// console.log(filteredListings);
