@@ -81,12 +81,30 @@
     font-size: 32px;
     margin-bottom: 30px;
   }
-
   .hotel-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-evenly; /* Add space between cards */
+    gap: 20px; /* Add space between cards */
   }
+
+  @media (max-width: 768px) {
+    .hotel-list {
+      justify-content: center; /* Center cards on small screens */
+    }
+  }
+
+  .hotel-card {
+    width: calc(33.33% - 20px); /* Maximum of three cards per row */
+    margin-bottom: 20px; /* Add space below each card */
+  }
+
+  @media (max-width: 768px) {
+    .hotel-card {
+      width: calc(100% - 20px); /* One card per row on small screens */
+    }
+  }
+
   .hotel-card {
     object-fit: cover;
   }
