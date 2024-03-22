@@ -14,7 +14,6 @@
     font-weight: bold;
     color: #333; /* Dark text color */
   }
-
   /* Hero section styles */
   .hero {
     position: relative; /* Position for overlay */
@@ -24,7 +23,38 @@
     justify-content: center;
     text-align: center;
     margin-top: 2rem;
+    overflow: hidden; /* Ensure content within the hero container doesn't overflow */
   }
+
+  /* Background overlay */
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+    z-index: 0; /* Ensure it's behind the content */
+  }
+
+  /* Content */
+  .hero-content {
+    color: #fff; /* White text color */
+    position: relative; /* Ensure content is on top */
+    z-index: 1; /* Make sure content appears on top of the overlay */
+  }
+
+  /* Home heading styles */
+  .home-heading,
+  .para {
+    font-size: 48px; /* Increase font size for better readability */
+    color: #fff; /* White text color */
+    font-weight: bold; /* Add bold font weight */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add text shadow for better contrast */
+    padding: 20px; /* Add padding to provide space around the text */
+  }
+
+  /* Hero section styles */
 
   /* Background image */
   .hero::before {
@@ -37,16 +67,12 @@
     left: 0;
     right: 0;
     bottom: 0;
-    filter: blur(5px); /* Apply blur effect */
+    filter: blur(3px); /* Apply blur effect */
     z-index: -1; /* Ensure it's behind the content */
   }
 
   /* Content */
-  .hero-content {
-    color: #fff; /* White text color */
-    position: relative; /* Ensure content is on top */
-    z-index: 1; /* Make sure content appears on top of the overlay */
-  }
+
   .hero-content h2 {
     font-size: 36px;
     margin-bottom: 20px;
@@ -226,7 +252,9 @@
 <section class="hero">
   <div class="hero-content">
     <h2 class="home-heading">Welcome to Wanderlust</h2>
-    <p>Find your dream hotel and book your next adventure with us!</p>
+    <p class="para">
+      Find your dream hotel and book your next adventure with us!
+    </p>
     <a href="/listings" class="btn">Explore Now</a>
   </div>
 </section>
@@ -236,7 +264,7 @@
   <div class="container">
     <h2>Featured Hotels</h2>
     <div class="hotel-list">
-      <% for(listing of allListings){ let i = 0;%>
+      <% let i = 0; for(listing of allListings){ %>
       <a href="/listings/<%= listing._id %>" class="card-a">
         <div class="hotel-card">
           <img src="<%= listing.image.url %>" alt="Hotel Image" />

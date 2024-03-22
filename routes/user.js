@@ -25,7 +25,7 @@ router
   .route("/signup")
 
   .get(wrapAsync(UserController.signupPage))
-  .post(wrapAsync(UserController.userRegister));
+  .post(UserController.userRegister);
 
 router.route("/user").get((req, res) => {
   res.render("user/aboutme.ejs");
